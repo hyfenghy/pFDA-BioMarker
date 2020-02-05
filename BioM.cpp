@@ -557,9 +557,9 @@ int main(int argc, char*argv[]) {
         const size_t Iter = atoi(argv[7]);
         for(size_t j=0; j<SampleCnt; j++) {
             const vector<string>& PV = PhenoLL[j];
+            const size_t S = SurvLL[j][0] == "0" ? 0 : 1;
+            SStatus += S;
             if(AllFlag==1 || PV[1] != "") {
-                const size_t S = SurvLL[j][0] == "0" ? 0 : 1;
-                SStatus += S;
                 SampleSurviveFlag.push_back(S);
                 GeneD.push_back(vector<double>(tGeneCnt));
                 vector<double>& GD = GeneD[GeneD.size()-1];
@@ -570,7 +570,7 @@ int main(int argc, char*argv[]) {
         }
         assert(GeneD.size()==SampleSurviveFlag.size());
         FILE* fp = fopen(argv[8], "w");
-        fprintf(fp, "%lf\n", (double)SStatus/SampleSurviveFlag.size());
+        fprintf(fp, "%lf\n", (double)SStatus/SampleCnt);
         fclose(fp);
         double* coef = new double[tGeneCnt];
         double* DEL = new double[tGeneCnt];
