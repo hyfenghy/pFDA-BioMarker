@@ -58,6 +58,6 @@ $BINDIR/Sentieon_BioM_Test.sh $BINARY ${IN}_Split ${IN}_Split ${OUT_SPLIT}_Train
 echo -n -e "SPLIT_TRAIN" "$TRAINTEST_ARG" '\t' >> $LOG
 $BINARY 5 ${IN}_Split_Outcome.tsv ${OUT_SPLIT}_Train_Final.prob $CNT >> $LOG
 
-cat <(head -20 <(cut -f 1 $KNN_MODEL)) <(cut -f 1 $TREE_MODEL )|sort|uniq|wc -l >> $LOG
-cat <(head -20 <(cut -f 1 $KNN_MODEL)) <(cut -f 1 $TREE_MODEL )|sort|uniq|tr '\n' ',' >> $LOG
+cat <(head -n $FEAT_CNT <(cut -f 1 $KNN_MODEL)) <(cut -f 1 $TREE_MODEL )|sort|uniq|wc -l >> $LOG
+cat <(head -n $FEAT_CNT <(cut -f 1 $KNN_MODEL)) <(cut -f 1 $TREE_MODEL )|sort|uniq|tr '\n' ',' >> $LOG
 echo >> $LOG
